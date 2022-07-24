@@ -1,5 +1,5 @@
 # Data-warehouse-tech-stack-with-MySQL-DBT-Airflow
-The aim of this Project is to create a scalable data warehouse that will host the vehicle trajectory data extracted by analysing footage taken by swarm drones and static roadside cameras. The data warehouse will by implementing ELT data engineering methods with MySQL, DBT and Airflow.
+The aim of this Project is to create a scalable data warehouse that will host the vehicle trajectory data extracted by analysing footage taken by swarm drones and static roadside cameras. The data warehouse will by implementing ELT data engineering methods with PostgreSQL, DBT, redash and Airflow 
 
 ## Data Flow Architechture
 ![image](https://user-images.githubusercontent.com/53911989/180662771-b93fc050-fb76-40ab-a5b9-814d34c16bac.png)
