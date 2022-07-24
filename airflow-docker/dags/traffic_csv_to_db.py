@@ -3,27 +3,39 @@ import argparse
 import os
 import csv
 from datetime import timedelta, datetime
-
 from model import Connection, TrafficFlow
 import config
 
-# def get_yesterday_date(fetch_date):
-#     return datetime.strptime(fetch_date, '%Y-%m-%d').date() - timedelta(1)
-
-# def get_file_path(fetch_date):
-#     yesterday = get_yesterday_date(fetch_date)
-#     filename = "tomtom_{}.csv".format(yesterday)
-#     return os.path.join(config.CSV_FILE_DIR, filename)
+def get_file_path(fetch_date):
+    """
+    This function constructs a filename to be used 
+    Params:
+        fetch_date: str
+            The date the data was downloaded from the pNeuma API
+    Returns:
+        filepath: os.Path
+            The path to the file
+    """
+    filename = "traffic_flow_{}.csv".format(fetch_date)
+    return os.path.join(config.CSV_FILE_DIR, filename)
 
 def main(fetch_date, db_connection):
-    # yesterday = get_yesterday_date(fetch_date)
-    # filename = get_file_path(fetch_date)
+    """
+    Loads the data from csv file to the the database
+    Params:
+        fetch_date: str
+            The date the data was downloaded from the web.
+            This is used to construct the file path
+        db_connection: str
+            The database connection string
+    """
+    filename = get_file_path(fetch_date)
     data_insert = []
     
-    with open('20181024_d1_0830_0900.csv', encoding='utf-8') as csvf:
+    with open(filename, encoding='utf-8') as csvf:
         csv_reader = csv.DictReader(csvf)
         for row in csv_reader:
-            traffic_data = TrafficFlow(id=row['id'],
+            traffic_data = TrafficFlow(
                                 track_id=row['track_id'],
                                 vehicle_types=row['vehicle_types'],
                                 traveled_d=row['traveled_d'],
