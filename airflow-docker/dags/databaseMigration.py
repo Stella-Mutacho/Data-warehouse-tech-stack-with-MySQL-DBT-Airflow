@@ -7,6 +7,12 @@ import config
 
 # Initialize Traffic_Flow Table
 def main(db_connection):
+    '''
+    Function to create a database if it does not already exist
+    Params: 
+    dbconnection
+        The connection string to connect to the postgresql database
+    '''
     Path(config.CSV_FILE_DIR).mkdir(parents=True, exist_ok=True)
     
     connection = Connection(db_connection)
