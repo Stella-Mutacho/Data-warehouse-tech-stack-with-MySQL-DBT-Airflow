@@ -1,7 +1,7 @@
 import os
 
 
-CSV_FILE_DIR = os.getenv("CSV_FILE_DIR", "/opt/airflow/dags/data")
+CSV_FILE_DIR = os.getenv("CSV_FILE_DIR", "/opt/airflow-docker/dags/data")
 
 PSQL_DB = os.getenv("PSQL_DB", "airflow")
 PSQL_USER = os.getenv("PSQL_USER", "airflow")
