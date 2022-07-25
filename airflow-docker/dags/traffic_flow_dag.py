@@ -22,11 +22,11 @@ with DAG(
 
     t1 = BashOperator(
         task_id='import_traffic_flow_to_csv',
-        bash_command='python /opt/airflow/dags/extract_data.py --date {{ ds }} --filename %s' % '20181024_d1_0830_0900.csv'
+        bash_command='python /opt/airflow-docker/dags/extract_data.py --date {{ ds }} --filename %s' % '20181024_d1_0830_0900.csv'
     )
     t2 = BashOperator(
         task_id='export_data_to_db',
-        bash_command='python /opt/airflow/dags/traffic_csv_to_db.py '
+        bash_command='python /opt/airflow-docker/dags/traffic_csv_to_db.py '
                      '--date {{ ds }} --connection %s' % Variable.get("data_dev_connection")
     )
 
