@@ -13,7 +13,7 @@ This repository contains the code used to build an ELT data Pipeline in accordan
 
 Docker - https://docs.docker.com/engine/install/ 
 
-## Key
+## Steps
 
 1. requirements - REquirements.txt
 
@@ -73,7 +73,7 @@ Navigate to `http://localhost:8080/` on the browser
 use `airflow` for username
 use `airflow` for password
 
-DBT:
+## DBT:
 
 DBT performs the T in the ELT process, transforming the data in the warehouses.
 
