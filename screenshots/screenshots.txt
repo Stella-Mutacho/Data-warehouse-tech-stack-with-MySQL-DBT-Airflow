@@ -1,1 +1,0 @@
-/home/stella/Documents/10 Academy/Week-11/Data-warehouse-tech-stack-with-MySQL-DBT-Airflow/screenshots/dbt models.odt
