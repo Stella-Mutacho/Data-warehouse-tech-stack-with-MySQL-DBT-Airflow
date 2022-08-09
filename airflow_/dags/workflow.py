@@ -3,6 +3,7 @@ from datetime import datetime,timedelta, date
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 import sys
+import syslog
 import os
 import pandas as pd
 import json
@@ -54,14 +55,14 @@ with DAG(dag_id="workflow",default_args=default_args,schedule_interval='@daily',
         )
     dbt_run = BashOperator(
         task_id="dbt_run",
-        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt run --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/traffic_dbt && ~/.local/bin/dbt run --profiles-dir {DBT_PROFILE_DIR}",
     )
     dbt_test = BashOperator(
         task_id="dbt_test",
-        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt test --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/traffic_dbt && ~/.local/bin/traffic_dbt test --profiles-dir {DBT_PROFILE_DIR}",
     )
     dbt_doc = BashOperator(
         task_id="dbt_doc",
-        bash_command=f"cd ~/dbt_ && ~/.local/bin/dbt docs generate --profiles-dir {DBT_PROFILE_DIR} && ~/.local/bin/dbt docs serve --port 7211 --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/dbt_ && ~/.local/bin/traffic_dbt docs generate --profiles-dir {DBT_PROFILE_DIR} && ~/.local/bin/traffic_dbt docs serve --port 7211 --profiles-dir {DBT_PROFILE_DIR}",
     )
 extract_task >> load_task >> dbt_run >> dbt_test >> dbt_doc
