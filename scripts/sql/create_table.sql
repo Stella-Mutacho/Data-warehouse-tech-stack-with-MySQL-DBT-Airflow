@@ -1,0 +1,2 @@
+DROP TABLE IF EXISTS traffic_flow;
+CREATE TABLE IF NOT EXISTS traffic_flow (track_id INT NOT NULL PRIMARY KEY, vehicle_types VARCHAR(30) NOT NULL, traveled_d FLOAT NOT NULL, avg_speed FLOAT NOT NULL, trajectory TEXT NOT NULL);
