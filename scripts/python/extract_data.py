@@ -1,5 +1,16 @@
 import os
 import pandas as pd
+import logging
+import syslog
+
+
+logger = logging.getLogger()
+formatter= logging.Formatter('%(asctime)s -%(lineno)s -%(levelname)s-%(message)s')
+logger.setLevel(logging.DEBUG)
+fhandler= logging.FileHandler(filename='../airflow/logs/extract.log', mode='w')
+fhandler.setFormatter(formatter)
+fhandler.setLevel(logging.INFO)
+logger.addHandler(fhandler)
 
 class Extractor:
 
@@ -47,10 +58,10 @@ class Extractor:
         data_dict= {columns[0]:track_ids, columns[1]:vehicle_types, columns[2]:traveled_d, columns[3]:avg_speeds,columns[4]:trajectory}
 
         df= pd.DataFrame(data_dict)
-        print("dataframe successfully created")
+        print('Successfully created dataframe')
         return df
     
-    def get_file_path(fetch_date):
+    def get_file_path(self, fetch_date):
         """
         This function constructs a filename to be used 
         Params:
@@ -65,5 +76,5 @@ class Extractor:
 
     def save_df(self, df, filename):
         df.to_csv(filename)
-        print("Successfully saved the data to a csv file")
+        print('Successfully saved')
 
