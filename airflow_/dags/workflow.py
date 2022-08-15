@@ -12,8 +12,8 @@ sys.path.append(os.path.abspath("includes/python"))
 
 from extract_data import Extractor
 from loader import Loader
-DBT_PROJECT_DIR = "~/dbt_"
-DBT_PROFILE_DIR = "~/dbt_/.dbt"
+DBT_PROJECT_DIR = "~/traffic_dbt"
+DBT_PROFILE_DIR = "~/traffic_dbt/.dbt"
 extract = Extractor()
 loader = Loader()
 
@@ -59,10 +59,10 @@ with DAG(dag_id="workflow",default_args=default_args,schedule_interval='@daily',
     )
     dbt_test = BashOperator(
         task_id="dbt_test",
-        bash_command=f"cd ~/traffic_dbt && ~/.local/bin/traffic_dbt test --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/traffic_dbt && ~/.local/bin/dbt test --profiles-dir {DBT_PROFILE_DIR}",
     )
     dbt_doc = BashOperator(
         task_id="dbt_doc",
-        bash_command=f"cd ~/dbt_ && ~/.local/bin/traffic_dbt docs generate --profiles-dir {DBT_PROFILE_DIR} && ~/.local/bin/traffic_dbt docs serve --port 7211 --profiles-dir {DBT_PROFILE_DIR}",
+        bash_command=f"cd ~/traffic_dbt && ~/.local/bin/dbt docs generate --profiles-dir {DBT_PROFILE_DIR} && ~/.local/bin/dbt docs serve --port 7211 --profiles-dir {DBT_PROFILE_DIR}",
     )
 extract_task >> load_task >> dbt_run >> dbt_test >> dbt_doc
